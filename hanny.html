@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>para mi hannycita de tu jando 💖</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#ffd1dc,#ffe6f0,#e0c3fc);
+    background-size:400% 400%;
+    animation:bg 12s ease infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.card{
+    background:rgba(255,255,255,.9);
+    border-radius:28px;
+    padding:40px 26px;
+    width:90%;
+    max-width:400px;
+    text-align:center;
+    box-shadow:0 25px 50px rgba(0,0,0,.2);
+}
+
+h1{color:#ff4f8b;margin-bottom:15px}
+p{color:#555;font-size:17px;margin-bottom:18px}
+
+button{
+    background:linear-gradient(135deg,#ff4f8b,#ff85b3);
+    border:none;
+    color:#fff;
+    padding:12px 26px;
+    border-radius:30px;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+    margin:6px;
+}
+
+button:hover{transform:scale(1.08)}
+
+#contador{
+    font-weight:bold;
+    font-size:18px;
+    color:#ff4f8b;
+}
+
+.tree{
+    margin:15px auto 25px;
+    width:200px;
+    height:200px;
+    position:relative;
+}
+
+.tree span{
+    position:absolute;
+    animation:pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.25)}
+    100%{transform:scale(1)}
+}
+
+.trunk{
+    position:absolute;
+    bottom:-15px;
+    left:50%;
+    transform:translateX(-50%);
+    width:18px;
+    height:55px;
+    background:#8d5a3b;
+    border-radius:6px;
+}
+
+.float{
+    position:fixed;
+    bottom:-30px;
+    font-size:22px;
+    animation:fly 6s linear infinite;
+}
+
+@keyframes fly{
+    0%{transform:translateY(0);opacity:1}
+    100%{transform:translateY(-110vh);opacity:0}
+}
+
+.hidden{display:none}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div id="p1">
+<h1>Para Hanny 💖</h1>
+<p>Desde el primer día supe que algo hermoso estaba comenzando contigo.</p>
+<p>Gracias por hacer mis días más felices y por regalarme tu sonrisa.</p>
+<button onclick="go(2)">Continuar 💌</button>
+</div>
+
+<div id="p2" class="hidden">
+<h1>Nuestro tiempo juntos ⏳</h1>
+<div class="tree" id="tree"></div>
+<div class="trunk"></div>
+<p>Mi amor por ti comenzó hace:</p>
+<div id="contador"></div>
+<button onclick="go(3)">Seguir 💖</button>
+</div>
+
+<div id="p3" class="hidden">
+<h1>Y ahora quiero preguntarte algo… 🥺</h1>
+<p>¿Quieres ser mi San Valentín?</p>
+<button onclick="go(4)">Sí</button>
+<button onclick="go(4)">Sí</button>
+</div>
+
+<div id="p4" class="hidden">
+<h1>¿Segura? 😳</h1>
+<button onclick="go(5)">Sí</button>
+<button onclick="go(5)">Sí</button>
+</div>
+
+<div id="p5" class="hidden">
+<h1>¿Segura segura? 🥰</h1>
+<button onclick="go(6)">Sí</button>
+<button onclick="go(6)">Sí</button>
+</div>
+
+<div id="p6" class="hidden">
+<h1 style="font-size:32px">TE AMO HANNYCITAAA 💖💖💖</h1>
+<p>Con todo mi corazón,<br>Jando ❤️</p>
+</div>
+
+</div>
+
+<script>
+function go(n){
+    for(let i=1;i<=6;i++){
+        document.getElementById("p"+i).classList.add("hidden");
+    }
+    document.getElementById("p"+n).classList.remove("hidden");
+}
+
+// CONTADOR
+const fechaInicio = new Date("2024-10-05T00:00:00");
+
+function contador(){
+    let now=new Date();
+    let diff=now-fechaInicio;
+
+    let s=Math.floor(diff/1000);
+    let m=Math.floor(s/60);
+    let h=Math.floor(m/60);
+    let d=Math.floor(h/24);
+
+    h%=24; m%=60; s%=60;
+
+    document.getElementById("contador").innerHTML=
+    `${d} días ${h} horas ${m} minutos ${s} segundos`;
+}
+
+setInterval(contador,1000);
+contador();
+
+// ÁRBOL CORAZÓN PERFECTO
+const tree=document.getElementById("tree");
+for(let t=0;t<360;t+=8){
+    let r=t*Math.PI/180;
+    let x=90+70*Math.pow(Math.sin(r),3);
+    let y=90-55*(13*Math.cos(r)-5*Math.cos(2*r)-2*Math.cos(3*r)-Math.cos(4*r))/16;
+
+    let s=document.createElement("span");
+    s.innerHTML="❤️";
+    s.style.left=x+"px";
+    s.style.top=y+"px";
+    tree.appendChild(s);
+}
+
+// corazones flotantes
+setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="float";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+},450);
+</script>
+
+</body>
+</html>
